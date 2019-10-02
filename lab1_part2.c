@@ -60,8 +60,6 @@ enum ButtonStates {Start_On, On, Off};
 
 int Button(int state)
 {
-	unsigned char tens = score / 10;
-	LCD_WriteData('0' + tens);
 	LCD_Cursor(1);
 	LCD_WriteData('0' + score);
 	switch(state)
@@ -210,6 +208,8 @@ int main(void)
 	DDRA = 0x00; PORTA = 0xFF;
 	DDRC = 0xFF; PORTC = 0x00;
 	DDRD = 0xFF; PORTD = 0x00;
+	LCD_init();
+	LCD_ClearScreen();
 	unsigned char i = 0;
 	tasks[i].state = Start_one;
 	tasks[i].period = 500;
@@ -225,8 +225,7 @@ int main(void)
 	tasks[i].period = 50;
 	tasks[i].elapsedTime = 0;
 	tasks[i].TickFct = &Button;
-	LCD_init();
-	LCD_ClearScreen();
+
 	TimerSet(PERIOD);
 	TimerOn();
 	while(1)
