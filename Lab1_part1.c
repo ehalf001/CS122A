@@ -1,3 +1,9 @@
+/*
+Name = Emanuel Halfon
+Partner Name = Ivan Lorna
+Section 021
+*/
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdlib.h>
