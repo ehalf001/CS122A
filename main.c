@@ -90,7 +90,6 @@ int ToggleButton(int state)
 		on_off = 0x00;
 		break;
 	}
-	port_B = SetBit(port_B, 4, on_off);
 	return state;
 }
 
