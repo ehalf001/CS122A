@@ -124,14 +124,14 @@ int ButtonSignalSend(int state)
 			poA = poA;
 	}
 	
-	USART_Send(PORTA, 0);
+	USART_Send(PORTA, 1);
 	return state;
 }
 
 enum ButtonSignalReciever {Start_S, BSR_Lookout, BSR_High,BSR_High2};
 int ButtonSignalRecieve(int state){
-	PORTA = USART_Receive(1);
-	USART_Flush(1);
+	PORTA = USART_Receive(0);
+	USART_Flush(0);
 	return state;
 }
 
