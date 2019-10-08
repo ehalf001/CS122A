@@ -22,7 +22,7 @@ unsigned char poA; //PORTA
 volatile unsigned char TimerFlag = 0; // TimerISR() sets this to 1. C programmer should clear to 0.
 unsigned long _avr_timer_M = 1; // Start count from here, down to 0. Default 1 ms.
 unsigned long _avr_timer_cntcurr = 0; // Current internal count of 1ms ticks
-const unsigned long PERIOD = 500; //Preset Period
+const unsigned long PERIOD = 100; //Preset Period
 
 //Functions
 unsigned char SetBit(unsigned char pin, unsigned char number, unsigned char bin_value)
@@ -130,8 +130,11 @@ int ButtonSignalSend(int state)
 
 enum ButtonSignalReciever {Start_S, BSR_Lookout, BSR_High,BSR_High2};
 int ButtonSignalRecieve(int state){
-	PORTA = USART_Receive(0);
-	USART_Flush(0);
+	if(USART_HasReceived(0))
+	{
+		PORTA = USART_Receive(0);
+		USART_Flush(0);
+	}
 	return state;
 }
 
@@ -144,7 +147,7 @@ int main(void)
 
 	Master_Servant = (~PINB & 0x01) ? 0x01 : 0x00;
 	initUSART(0);
-	 
+	initUSART(1); 
 	if(Master_Servant)
 	{
 		tasks[0].state = Start;
@@ -156,7 +159,7 @@ int main(void)
 	else
 	{
 		tasks[0].state = Start;
-		tasks[0].period = 500;
+		tasks[0].period = 100;
 		tasks[0].elapsedTime = 0;
 		tasks[0].TickFct = &ButtonSignalRecieve;	
 	}
