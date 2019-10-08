@@ -22,7 +22,7 @@ unsigned char poA; //PORTA
 volatile unsigned char TimerFlag = 0; // TimerISR() sets this to 1. C programmer should clear to 0.
 unsigned long _avr_timer_M = 1; // Start count from here, down to 0. Default 1 ms.
 unsigned long _avr_timer_cntcurr = 0; // Current internal count of 1ms ticks
-const unsigned long PERIOD = 50; //Preset Period
+const unsigned long PERIOD = 500; //Preset Period
 
 //Functions
 unsigned char SetBit(unsigned char pin, unsigned char number, unsigned char bin_value)
@@ -115,6 +115,7 @@ int ButtonSignalSend(int state)
 	switch(state){//action
 		case BSS_Low:
 			PORTA = 0x00;
+			
 			break;
 		case BSS_High:
 			PORTA = 0x01;
@@ -123,7 +124,7 @@ int ButtonSignalSend(int state)
 			poA = poA;
 	}
 	
-
+	USART_Send(PORTA, 0);
 	return state;
 }
 
@@ -155,20 +156,15 @@ int main(void)
 	else
 	{
 		tasks[0].state = Start;
-		tasks[0].period = 50;
+		tasks[0].period = 500;
 		tasks[0].elapsedTime = 0;
 		tasks[0].TickFct = &ButtonSignalRecieve;	
-		
 	}
 	
 	TimerSet(PERIOD);
 	TimerOn();
     while (1) 
     {
-		if(Master_Servant)
-		{
-			USART_Send(PORTA,0);	
-		}
 		continue;
     }
 }
