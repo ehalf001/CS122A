@@ -55,7 +55,7 @@ void TimerOff() {
 
 
 typedef struct Task {
-	int state; // Task’s current state
+	int state; // Taskâ€™s current state
 	unsigned long period; // Task period
 	unsigned long elapsedTime; // Time elapsed since last task tick
 	int (*TickFct)(int); // Task tick function
@@ -175,7 +175,7 @@ int main(void)
 			tasks[0].TickFct = &ButtonSignalSend;
 			TimerSet(PERIOD);
 			TimerOn();
-			USART_Send(PORTA, 0);
+			USART_Send(PORTA, 1);
 			count = 0x00;
 		}
 		continue;
