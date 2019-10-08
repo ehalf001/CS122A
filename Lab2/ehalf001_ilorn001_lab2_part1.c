@@ -142,7 +142,7 @@ int main(void)
 	
 
 	Master_Servant = (~PINB & 0x01) ? 0x01 : 0x00;
-	
+	initUSART(0);
 	 
 	if(Master_Servant)
 	{
@@ -172,4 +172,3 @@ int main(void)
 		continue;
     }
 }
-
