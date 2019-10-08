@@ -131,10 +131,10 @@ int ButtonSignalSend(int state)
 
 enum ButtonSignalReciever {Start_S, BSR_Lookout, BSR_High,BSR_High2};
 int ButtonSignalRecieve(int state){
-	if(USART_HasReceived(0))
+	if(USART_HasReceived(1))
 	{
-		PORTA = USART_Receive(0);
-		USART_Flush(0);	
+		PORTA = USART_Receive(1);
+		USART_Flush(1);	
 	}
 	return state;
 }
@@ -148,7 +148,7 @@ int main(void)
 
 	Master_Servant = B0;
 	initUSART(0);
-	 
+	initUSART(1); 
 	if(Master_Servant)
 	{
 		tasks[0].state = Start;
