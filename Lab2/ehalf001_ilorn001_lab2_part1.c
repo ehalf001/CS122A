@@ -1,7 +1,7 @@
 /*    Name & Email: Ivan Lorna / ilorn001@ucr.edu
  *    Partner(s) Name & E-mail: Emanuel Halfon / ehalf001@ucr.edu
  *    Lab Section:  021
- *    Assignment: Lab 2
+ *    Assignment: Lab 2 Part 1
  *    Exercise Description: [optional - include for your own benefit]
  *    
  *    I acknowledge all content contained herein, excluding template 
@@ -54,7 +54,7 @@ void TimerOff() {
 
 
 typedef struct Task {
-	int state; // Task’s current state
+	int state; // Taskâ€™s current state
 	unsigned long period; // Task period
 	unsigned long elapsedTime; // Time elapsed since last task tick
 	int (*TickFct)(int); // Task tick function
